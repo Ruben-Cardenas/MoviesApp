@@ -1,20 +1,53 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+// Importamos las pantallas
+import Home from './src/screens/Home';
+import MovieDetails from './src/screens/MovieDetails';
+import AddMovie from './src/screens/AddMovie';
+import EditMovie from './src/screens/EditMovie';
+import DeleteMovie from './src/screens/DeleteMovie';
+import Favorites from './src/screens/Favorites';
+
+// Importar el context provider
+import { FavoriteProvider } from './src/screens/FavoriteContext'; // Ajusta esta ruta si es necesario
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <FavoriteProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen
+            name="MovieDetails"
+            component={MovieDetails}
+            options={{ title: 'Detalles de la Película' }}
+          />
+          <Stack.Screen
+            name="AddMovie"
+            component={AddMovie}
+            options={{ title: 'Agregar Película' }}
+          />
+          <Stack.Screen
+            name="EditMovie"
+            component={EditMovie}
+            options={{ title: 'Editar Película' }}
+          />
+          <Stack.Screen
+            name="DeleteMovie"
+            component={DeleteMovie}
+            options={{ title: 'Eliminar Película' }}
+          />
+          <Stack.Screen
+            name="Favorites"
+            component={Favorites}
+            options={{ title: 'Favoritos' }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </FavoriteProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
