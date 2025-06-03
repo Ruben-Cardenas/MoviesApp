@@ -67,10 +67,8 @@ export default function Home() {
   const navigation = useNavigation();
   const { favoriteMovies, toggleFavorite } = useContext(FavoriteContext);
 
-  // 1. Estado para búsqueda
   const [searchQuery, setSearchQuery] = useState('');
 
-  // 2. Filtrar películas
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -109,7 +107,6 @@ export default function Home() {
     <View style={styles.container}>
       <Text style={styles.title}>Cartelera</Text>
 
-      {/* 3. Campo de búsqueda */}
       <TextInput
         style={styles.searchInput}
         placeholder="Buscar película..."
@@ -149,9 +146,16 @@ export default function Home() {
           <Icon name="favorite" size={20} color="#fff" />
           <Text style={styles.buttonText}>Favoritos</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: '#9C27B0' }]}
+          onPress={() => navigation.navigate('UpcomingMovies')}
+        >
+          <Icon name="movie" size={20} color="#fff" />
+          <Text style={styles.buttonText}>Estrenos</Text>
+        </TouchableOpacity>
       </View>
 
-      {/* 4. FlatList con películas filtradas */}
       <FlatList
         data={filteredMovies}
         numColumns={2}
