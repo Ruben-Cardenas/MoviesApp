@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,11 +10,11 @@ import AddMovie from '../screens/AddMovie';
 import EditMovie from '../screens/EditMovie';
 import DeleteMovie from '../screens/DeleteMovie';
 import Favorites from '../screens/Favorites';
+import Login from '../screens/Login'; // 👈 Asegúrate de importar esta pantalla
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
-// ✅ DrawerNavigator solo con las pantallas principales
 function DrawerNavigator() {
   return (
     <Drawer.Navigator
@@ -22,7 +22,7 @@ function DrawerNavigator() {
       screenOptions={{
         headerShown: true,
         drawerActiveTintColor: '#e91e63',
-        drawerLabelStyle: { fontSize: 16 }
+        drawerLabelStyle: { fontSize: 16 },
       }}
     >
       <Drawer.Screen
@@ -64,7 +64,7 @@ function DrawerNavigator() {
         name="MovieDetails"
         component={MovieDetails}
         options={{
-          drawerItemStyle: { display: 'none' }, // Ocultar en el Drawer
+          drawerItemStyle: { display: 'none' },
           drawerIcon: ({ color }) => <Icon name="film-outline" size={22} color={color} />
         }}
       />
@@ -72,11 +72,12 @@ function DrawerNavigator() {
   );
 }
 
-// ✅ Stack Navigator principal que incluye el Drawer y MovieDetails
+// ✅ Navegación principal con Login antes del Drawer
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Main" component={DrawerNavigator} />
         <Stack.Screen name="MovieDetails" component={MovieDetails} />
       </Stack.Navigator>
