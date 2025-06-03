@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const AddMovie = () => {
@@ -11,29 +18,31 @@ const AddMovie = () => {
     if (title && description && imageUrl) {
       console.log('Película agregada:', { title, description, imageUrl });
     } else {
-      alert('Por favor, completa todos los campos');
+      Alert.alert('Campos incompletos', 'Por favor, completa todos los campos');
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Agregar Película</Text>
+      <Text style={styles.title}>🎬 Agregar Película</Text>
 
       <View style={styles.inputContainer}>
-        <Icon name="document-text-outline" size={24} color="#8b4009" />
+        <Icon name="film-outline" size={22} color="#FFD700" />
         <TextInput
           style={styles.input}
           placeholder="Título de la película"
+          placeholderTextColor="#aaa"
           value={title}
           onChangeText={setTitle}
         />
       </View>
 
       <View style={styles.inputContainer}>
-        <Icon name="document-text-outline" size={24} color="#8b4009" />
+        <Icon name="text-outline" size={22} color="#FFD700" />
         <TextInput
-          style={[styles.input, { height: 100 }]}
+          style={[styles.input, styles.textArea]}
           placeholder="Descripción de la película"
+          placeholderTextColor="#aaa"
           multiline
           value={description}
           onChangeText={setDescription}
@@ -41,17 +50,18 @@ const AddMovie = () => {
       </View>
 
       <View style={styles.inputContainer}>
-        <Icon name="image-outline" size={24} color="#8b4009" />
+        <Icon name="image-outline" size={22} color="#FFD700" />
         <TextInput
           style={styles.input}
           placeholder="URL de la imagen"
+          placeholderTextColor="#aaa"
           value={imageUrl}
           onChangeText={setImageUrl}
         />
       </View>
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Agregar Película</Text>
+        <Text style={styles.buttonText}>📽️ Guardar Película</Text>
       </TouchableOpacity>
     </View>
   );
@@ -60,48 +70,55 @@ const AddMovie = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#1c1c1e',
+    padding: 25,
     justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#f7f7f7',
   },
   title: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#333',
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#FFD700',
+    marginBottom: 30,
+    textAlign: 'center',
   },
   inputContainer: {
     flexDirection: 'row',
+    backgroundColor: '#2c2c2e',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginBottom: 20,
+    borderRadius: 12,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    width: '100%',
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   input: {
     flex: 1,
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 10,
-    marginLeft: 10,
-    paddingHorizontal: 15,
+    marginLeft: 12,
+    color: '#fff',
     fontSize: 16,
+  },
+  textArea: {
+    height: 90,
+    textAlignVertical: 'top',
   },
   button: {
-    backgroundColor: '#8b4009',
-    borderRadius: 10,
+    backgroundColor: '#FFD700',
     paddingVertical: 15,
-    paddingHorizontal: 20,
-    marginTop: 20,
+    borderRadius: 12,
+    alignItems: 'center',
+    shadowColor: '#FFD700',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 6,
   },
   buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
+    color: '#1c1c1e',
     fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

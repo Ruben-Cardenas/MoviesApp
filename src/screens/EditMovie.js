@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const EditMovie = () => {
   const [title, setTitle] = useState('');
@@ -8,43 +16,108 @@ const EditMovie = () => {
 
   const handleSubmit = () => {
     if (!title || !description || !imageUrl) {
-      Alert.alert('Error', 'Por favor completa todos los campos.');
+      Alert.alert('⚠️ Campos incompletos', 'Por favor completa todos los campos.');
       return;
     }
 
-    // Aquí iría la lógica para editar película (PUT/PATCH a la API)
-    Alert.alert('Película editada', `Título: ${title}`);
+    Alert.alert('🎞️ Película editada', `Título: ${title}`);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Título</Text>
-      <TextInput style={styles.input} value={title} onChangeText={setTitle} />
+      <Text style={styles.header}>🎬 Editar Película</Text>
 
-      <Text style={styles.label}>Descripción</Text>
-      <TextInput style={styles.input} value={description} onChangeText={setDescription} />
+      <View style={styles.inputGroup}>
+        <Icon name="create-outline" size={20} color="#FFD700" />
+        <TextInput
+          style={styles.input}
+          placeholder="Título"
+          placeholderTextColor="#aaa"
+          value={title}
+          onChangeText={setTitle}
+        />
+      </View>
 
-      <Text style={styles.label}>URL de Imagen</Text>
-      <TextInput style={styles.input} value={imageUrl} onChangeText={setImageUrl} />
+      <View style={styles.inputGroup}>
+        <Icon name="document-text-outline" size={20} color="#FFD700" />
+        <TextInput
+          style={[styles.input, styles.textArea]}
+          placeholder="Descripción"
+          placeholderTextColor="#aaa"
+          multiline
+          numberOfLines={4}
+          value={description}
+          onChangeText={setDescription}
+        />
+      </View>
+
+      <View style={styles.inputGroup}>
+        <Icon name="image-outline" size={20} color="#FFD700" />
+        <TextInput
+          style={styles.input}
+          placeholder="URL de la imagen"
+          placeholderTextColor="#aaa"
+          value={imageUrl}
+          onChangeText={setImageUrl}
+        />
+      </View>
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Editar Película</Text>
+        <Text style={styles.buttonText}>✅ Guardar Cambios</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { padding: 20 },
-  label: { fontSize: 16, fontWeight: 'bold', marginBottom: 5 },
+  container: {
+    flex: 1,
+    backgroundColor: '#1c1c1e',
+    padding: 24,
+    justifyContent: 'center',
+  },
+  header: {
+    fontSize: 26,
+    fontWeight: '700',
+    color: '#FFD700',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+  inputGroup: {
+    flexDirection: 'row',
+    backgroundColor: '#2c2c2e',
+    alignItems: 'center',
+    borderRadius: 12,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    marginBottom: 20,
+  },
   input: {
-    borderWidth: 1, borderColor: '#ccc', borderRadius: 5,
-    padding: 10, marginBottom: 15
+    flex: 1,
+    marginLeft: 12,
+    color: '#fff',
+    fontSize: 16,
+  },
+  textArea: {
+    height: 90,
+    textAlignVertical: 'top',
   },
   button: {
-    backgroundColor: '#2196f3', padding: 15, borderRadius: 5, alignItems: 'center'
+    backgroundColor: '#FFD700',
+    paddingVertical: 15,
+    borderRadius: 12,
+    alignItems: 'center',
+    shadowColor: '#FFD700',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 6,
   },
-  buttonText: { color: 'white', fontWeight: 'bold' }
+  buttonText: {
+    color: '#1c1c1e',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
 
 export default EditMovie;

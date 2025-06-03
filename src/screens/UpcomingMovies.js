@@ -1,3 +1,4 @@
+// src/screens/UpcomingMovies.js
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Linking, Image } from 'react-native';
 
@@ -78,13 +79,13 @@ const UpcomingMovies = ({ navigation }) => {
             <Text style={styles.movieDescription}>{item.description}</Text>
             <View style={styles.buttonContainer}>
               <TouchableOpacity
-                style={styles.button}
+                style={[styles.button, styles.detailsButton]}
                 onPress={() => navigation.navigate('MovieDetails', { movie: item })}
               >
                 <Text style={styles.buttonText}>Ver Detalles</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.button}
+                style={[styles.button, styles.trailerButton]}
                 onPress={() => openTrailer(item.trailer)}
               >
                 <Text style={styles.buttonText}>Ver Trailer</Text>
@@ -92,6 +93,8 @@ const UpcomingMovies = ({ navigation }) => {
             </View>
           </View>
         )}
+        contentContainerStyle={{ paddingBottom: 20 }}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -100,49 +103,67 @@ const UpcomingMovies = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: '#121212',
+    paddingHorizontal: 16,
+    paddingTop: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 12,
+    marginBottom: 16,
     textAlign: 'center',
+    color: '#e50914', // rojo tipo Netflix
+    letterSpacing: 1.5,
   },
   movieItem: {
+    backgroundColor: '#1f1f1f',
+    borderRadius: 12,
+    padding: 15,
     marginBottom: 20,
-    padding: 16,
-    backgroundColor: '#f2f2f2',
-    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.7,
+    shadowRadius: 10,
+    elevation: 8,
   },
   movieImage: {
     width: '100%',
-    height: 200,
-    borderRadius: 8,
-    marginBottom: 10,
+    height: 220,
+    borderRadius: 12,
+    marginBottom: 12,
   },
   movieTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#fff',
   },
   movieDescription: {
-    marginTop: 6,
     fontSize: 14,
-    color: '#333',
+    color: '#ccc',
+    marginTop: 6,
+    marginBottom: 12,
   },
   buttonContainer: {
-    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   button: {
-    backgroundColor: '#008080',
-    padding: 8,
-    borderRadius: 6,
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 30,
+    alignItems: 'center',
+    marginHorizontal: 5,
+  },
+  detailsButton: {
+    backgroundColor: '#e50914',
+  },
+  trailerButton: {
+    backgroundColor: '#444',
   },
   buttonText: {
     color: '#fff',
-    fontWeight: '600',
+    fontWeight: '700',
+    fontSize: 16,
   },
 });
 

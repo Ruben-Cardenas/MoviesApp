@@ -66,7 +66,6 @@ const movies = [
 export default function Home() {
   const navigation = useNavigation();
   const { favoriteMovies, toggleFavorite } = useContext(FavoriteContext);
-
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredMovies = movies.filter((movie) =>
@@ -96,7 +95,7 @@ export default function Home() {
           <Icon
             name={isFavorite ? 'favorite' : 'favorite-border'}
             size={24}
-            color={isFavorite ? '#e91e63' : '#555'}
+            color={isFavorite ? '#FF3D57' : '#aaa'}
           />
         </TouchableOpacity>
       </TouchableOpacity>
@@ -105,18 +104,19 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cartelera</Text>
+      <Text style={styles.title}>🎬 Cartelera Cinematográfica 🎞️</Text>
 
       <TextInput
         style={styles.searchInput}
-        placeholder="Buscar película..."
+        placeholder="🔍 Buscar película..."
+        placeholderTextColor="#aaa"
         value={searchQuery}
         onChangeText={(text) => setSearchQuery(text)}
       />
 
       <View style={styles.buttonRow}>
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#4CAF50' }]}
+          style={[styles.button, { backgroundColor: '#D32F2F' }]}
           onPress={() => navigation.navigate('AddMovie')}
         >
           <Icon name="add" size={20} color="#fff" />
@@ -124,7 +124,7 @@ export default function Home() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#2196F3' }]}
+          style={[styles.button, { backgroundColor: '#1976D2' }]}
           onPress={() => navigation.navigate('EditMovie')}
         >
           <Icon name="edit" size={20} color="#fff" />
@@ -132,7 +132,7 @@ export default function Home() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#F44336' }]}
+          style={[styles.button, { backgroundColor: '#C2185B' }]}
           onPress={() => navigation.navigate('DeleteMovie')}
         >
           <Icon name="delete" size={20} color="#fff" />
@@ -140,7 +140,7 @@ export default function Home() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#FF9800' }]}
+          style={[styles.button, { backgroundColor: '#F57C00' }]}
           onPress={() => navigation.navigate('Favorites')}
         >
           <Icon name="favorite" size={20} color="#fff" />
@@ -148,7 +148,7 @@ export default function Home() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#9C27B0' }]}
+          style={[styles.button, { backgroundColor: '#512DA8' }]}
           onPress={() => navigation.navigate('UpcomingMovies')}
         >
           <Icon name="movie" size={20} color="#fff" />
@@ -170,59 +170,66 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#1C1C1C',
     paddingTop: 40,
   },
   title: {
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 10,
+    color: '#FFD700',
+    marginBottom: 15,
+    fontFamily: 'serif',
+    textShadowColor: '#000',
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 3,
   },
   searchInput: {
     height: 40,
-    borderColor: '#ccc',
+    borderColor: '#444',
     borderWidth: 1,
     marginHorizontal: 20,
-    marginBottom: 10,
+    marginBottom: 15,
     borderRadius: 20,
     paddingHorizontal: 15,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#2C2C2C',
+    color: '#fff',
   },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 15,
-    marginBottom: 15,
-    paddingHorizontal: 10,
     flexWrap: 'wrap',
+    marginBottom: 10,
+    paddingHorizontal: 10,
   },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 14,
     borderRadius: 25,
-    elevation: 3,
     margin: 5,
+    elevation: 4,
   },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
-    marginLeft: 8,
-    fontSize: 16,
+    marginLeft: 6,
+    fontSize: 15,
   },
   list: {
     paddingHorizontal: 10,
   },
   card: {
     flex: 1,
-    backgroundColor: '#f2f2f2',
-    margin: 5,
+    backgroundColor: '#2E2E2E',
+    margin: 6,
     borderRadius: 10,
     padding: 8,
     alignItems: 'center',
     position: 'relative',
+    borderWidth: 1,
+    borderColor: '#FFD700',
   },
   image: {
     width: '100%',
@@ -233,13 +240,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 6,
+    color: '#FFD700',
     textAlign: 'center',
   },
   description: {
     fontSize: 12,
     textAlign: 'center',
     marginTop: 4,
-    color: '#555',
+    color: '#ccc',
   },
   favoriteIcon: {
     position: 'absolute',
